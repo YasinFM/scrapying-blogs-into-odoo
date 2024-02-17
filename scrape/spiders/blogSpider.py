@@ -2,7 +2,7 @@ import scrapy
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 
-
+#scrapy crawl blogSpider
 class BlogspiderSpider(scrapy.Spider):
     name = "blogSpider"
     allowed_domains = ["7tooti.com"]

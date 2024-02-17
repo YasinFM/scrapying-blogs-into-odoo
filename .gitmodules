@@ -1,0 +1,3 @@
+[submodule "odoo-15-docker-compose"]
+	path = odoo-15-docker-compose
+	url = https://github.com/minhng92/odoo-15-docker-compose.git
