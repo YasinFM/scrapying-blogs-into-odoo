@@ -27,6 +27,10 @@ next_page_identifier = "a#load-more-link::attr(href)"
 #   example: /home/user/blogs.json
 json_saver_file = "/home/yasin/Desktop/Work/scrape/scrape/blogs.json"
 
+#   HTML file
+#   we use this file to store, clean and reformat the html we get from our site
+#   example: /home/user/html_file.html
+HTML_file = "/home/yasin/Desktop/Work/scrape/scrape/html_file.html"
 
 ####################################################################
 #   Storing the information

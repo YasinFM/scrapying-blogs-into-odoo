@@ -6,12 +6,11 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))  # Add the parent directory to the sys.path
 import config
 
-#scrapy crawl blogSpider
-
 def get_html_id(string):
         url_parts = string.split("/")
         id = url_parts[len(url_parts)-1]
         return id
+
 class BlogspiderSpider(scrapy.Spider):
     name = "blogSpider"
     allowed_domains = config.allowed_domains
