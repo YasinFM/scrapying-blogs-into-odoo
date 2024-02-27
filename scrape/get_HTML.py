@@ -25,38 +25,44 @@ def get_html_inside_div(html_path, div_class=None, div_id=None):
 
     # Return the HTML inside the div
     if div:
-        return str(div)
+        return str(div), div.text
     else:
-        return ""
+        return "", ""
 
 def get_html_title(html_path):
     title = ""
+    title_name = ""
     div_class = 'w3-container'
     div_id = 'div-header'
-    title = get_html_inside_div(html_path,div_class,div_id)
+    title, title_name = get_html_inside_div(html_path,div_class,div_id)
     
-    return title
+    return title, title_name
 
 def get_html_content(html_path):
     content = ""
+    content_text = ""
     div_class = 'main-content'
     div_id = ''
-    content = get_html_inside_div(html_path,div_class,div_id)
+    content, content_text = get_html_inside_div(html_path,div_class,div_id)
     
     return content
 
 def reformat_html(html_path):
     '''
-    The main module to strip, clean and overall reformat our html to then upload it.
+    The main module to strip, clean and overall reformat our html and saves it
+    so we could upload later.
     '''
-    title = get_html_title(html_path)
+    # Create the data folder if it doesn't already exist 
+    if not os.path.exists('html-files'): 
+        os.mkdir('html-files')
+    
+    title, name = get_html_title(html_path)
     content = get_html_content(html_path)
-    reformated_html = title +  "\n" + content
-    with open(html_path,"w") as html:
-        html.write(reformated_html)
-    
-    return reformated_html
-    
+    #reformated_html = title +  "\n" + content
+    if title != '':
+        with open('html-files/' + name + '.html', 'w') as f: 
+            f.write(content) 
+        
 
 def html_file():
     '''
@@ -73,3 +79,4 @@ def html_file():
             file.write(r.text)
         reformat_html(config.HTML_file)
         
+html_file()
