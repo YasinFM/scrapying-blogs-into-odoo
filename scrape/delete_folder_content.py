@@ -20,6 +20,10 @@ def delete_folder_contents(folder_path):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+
+
 folder_path = "html-files"
 if __name__ == "__main__":
     delete_folder_contents(folder_path)
+    
+

@@ -1,3 +1,4 @@
+import json
 import requests
 from bs4 import BeautifulSoup
 import os
@@ -68,12 +69,13 @@ def html_file():
     '''
     The main module that gets the html from our site
     '''
-    blog_id_file = open(config.file_id_path,"r")
+    with open(config.file_id_path, 'r') as f:
+        blog_id_file = json.load(f)
+    #list_of_ids = 
     
-    for id_file in blog_id_file:
-        html_id = id_file[:len(id_file)-1]
-        
-        url = config.start_url[0] + "page/" + html_id
+    for id_file in blog_id_file["items"]:
+        html_id = id_file["name"]
+        url = config.start_url + "page/" + html_id
         r = requests.get(url=url)
         with open(config.HTML_file,"w") as file:
             file.write(r.text)

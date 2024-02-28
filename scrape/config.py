@@ -5,17 +5,23 @@
 ####################################################################
 #   Getting the information
 ####################################################################
-#   Allowed domains for scraping
-#   example: allowed_domains = ["example.com"]
+#   Scrapy
+####        Allowed domains for scraping
+####        example: allowed_domains = ["example.com"]
 allowed_domains = ["7tooti.com"]
 
-#   Start url for scraping
-#   example: start_urls = ["https://example.com/blogs"]
+####        Start url for scraping
+####        example: start_urls = ["https://example.com/blogs"]
 start_url = "https://7tooti.com/wb/blog/"
+
+#   Content URL
+#   url that contains every content of the page in a JSON format
+#   example: https://example.com/api/v2/cms/term-taxonomies/205/contents
+content_url = "https://7tooti.com/api/v2/cms/term-taxonomies/205/contents"
 
 #   File path to save blog's html ids
 #   example: /home/user/blog_html_ids.txt
-file_id_path = "/home/yasin/Desktop/Work/scrape/scrape/blog_html_ids.txt"
+file_id_path = "/home/yasin/Desktop/Work/scrape/scrape/blog_ids.json"
 
 #   Next page button's identifier
 #   example: "div.class#id::attr(href)"
@@ -38,24 +44,24 @@ HTML_file = "/home/yasin/Desktop/Work/scrape/scrape/html_file.html"
 
 #   Odoo url
 #   example: http://odoo.com
-url = "http://localhost:10015"
+odoo_url = "http://localhost:10015"
 
 #   Database name
 #   ** to find your data base name simple activate developer mode and **
 #   ** you should see it next to the name of your account **
 #   example: db_name
-db = "odoo"
+odoo_db = "odoo"
 
 #   User nameusername
 #   eample: username
-username = "odoo"
+odoo_username = "odoo"
 
 #   Password
 #   example: password
-password = "odoo"
+odoo_password = "odoo"
 
 #   API key
 #   follow this guide to generate an api key: "https://www.odoo.com/documentation/15.0/developer/reference/external_api.html#api-keys"
-API_key = "8cecbf837aec01d68c2fd6d848fb8f60ac5085d6"
+odoo_API_key = "8cecbf837aec01d68c2fd6d848fb8f60ac5085d6"
 
 

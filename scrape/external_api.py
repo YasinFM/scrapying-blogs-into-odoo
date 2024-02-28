@@ -5,27 +5,18 @@ import config
 import xmlrpc.client
 import base64
 
-#filename[:len(filename) - 5]
-
-# Odoo instance information
-url = "http://localhost:10015"
-db = "odoo"
-username = "odoo"
-password = "odoo"
-API_key = "8cecbf837aec01d68c2fd6d848fb8f60ac5085d6"
-
 # Connect to Odoo through JSON-RPC
-common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-uid = common.authenticate(db, username, password, {})
+common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(config.odoo_url))
+uid = common.authenticate(config.odoo_db, config.odoo_username, config.odoo_password, {})
 
-models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(config.odoo_url))
 
 # Directory containing HTML files
 html_files_directory = 'html-files'
 
 def create_blog():
     # Check if the blog already exists
-    existing_blog_ids = models.execute_kw(db, uid, password, 'blog.blog', 'search', [[('name', '=', 'Blog')]])
+    existing_blog_ids = models.execute_kw(config.odoo_db, uid, config.odoo_password, 'blog.blog', 'search', [[('name', '=', 'Blog')]])
     if existing_blog_ids:
         print("Blog already exists.")
         return existing_blog_ids[0]
@@ -34,7 +25,7 @@ def create_blog():
     blog_data = {
         'name': 'Blog',
     }
-    blog_id = models.execute_kw(db, uid, password, 'blog.blog', 'create', [blog_data])
+    blog_id = models.execute_kw(config.odoo_db, uid, config.odoo_password, 'blog.blog', 'create', [blog_data])
     print("Blog created with ID:", blog_id)
     return blog_id
 
@@ -50,7 +41,7 @@ def create_blog_post(filename, html_content, blog_id):
     }
 
     # Create the blog post
-    post_id = models.execute_kw(db, uid, password, 'blog.post', 'create', [post_data])
+    post_id = models.execute_kw(config.odoo_db, uid, config.odoo_password, 'blog.post', 'create', [post_data])
 
     return post_id
 
