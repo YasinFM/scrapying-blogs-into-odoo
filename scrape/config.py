@@ -11,7 +11,7 @@ allowed_domains = ["7tooti.com"]
 
 #   Start url for scraping
 #   example: start_urls = ["https://example.com/blogs"]
-start_url = ["https://7tooti.com/wb/blog/"]
+start_url = "https://7tooti.com/wb/blog/"
 
 #   File path to save blog's html ids
 #   example: /home/user/blog_html_ids.txt

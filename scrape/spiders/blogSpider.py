@@ -15,10 +15,26 @@ class BlogspiderSpider(scrapy.Spider):
     name = "blogSpider"
     allowed_domains = config.allowed_domains
     start_urls = config.start_url
+
+    handle_httpstatus_list = [404]  # Handle 404 errors
+    
+    def start_requests(self):
+        base_url = "https://7tooti.com/wb/blog/?_px_p="
+        for id in range(1, 132):
+            url = base_url + str(id)
+            if id != 1:
+                yield scrapy.Request(url=url, callback=self.parse)
+            else:
+                yield scrapy.Request(url=config.start_url, callback=self.parse)
     
     
     
     def parse(self, response):
+        if response.status == 404:
+            self.logger.error("Page not found: %s", response.url)
+            return
+
+        # Your parsing logic continues here
         
         blogs = response.css('div.w3-card-4.w3-margin.w3-white').getall()
         
@@ -47,8 +63,8 @@ class BlogspiderSpider(scrapy.Spider):
                     'id' : html_address
                 }
                 '''
-        
+        '''
         next_page = response.css(config.next_page_identifier).get()
         if next_page is not None:
             yield response.follow(next_page, callback=self.parse)
-            
+        '''
