@@ -2,8 +2,6 @@ import json
 import requests
 from bs4 import BeautifulSoup
 import os
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))  # Add the parent directory to the sys.path
 import config
 
 def get_html_inside_div(html_path, div_class=None, div_id=None):
@@ -31,6 +29,8 @@ def get_html_inside_div(html_path, div_class=None, div_id=None):
         return "", "", ""
 
 def get_html_title(html_path):
+    
+    #   Get title from HTML tag
     title = ""
     title_name = ""
     div_class = 'w3-container'
@@ -40,6 +40,8 @@ def get_html_title(html_path):
     return title, title_name
 
 def get_html_content(html_path):
+    
+    #   Remove extra contents of div  
     content = ""
     content_text = ""
     div_class = 'main-content'
@@ -49,29 +51,25 @@ def get_html_content(html_path):
     return content_div
 
 def reformat_html(html_path):
-    '''
-    The main module to strip, clean and overall reformat our html and saves it
-    so we could upload later.
-    '''
+    #   The main module to strip, clean and overall reformats our html
+    
     # Create the data folder if it doesn't already exist 
     if not os.path.exists('html-files'): 
         os.mkdir('html-files')
     
     title, name = get_html_title(html_path)
     content = get_html_content(html_path)
-    #reformated_html = title +  "\n" + content
+
     if title != '':
         with open('html-files/' + name + '.html', 'w') as f: 
             f.write(content) 
         
 
 def html_file():
-    '''
-    The main module that gets the html from our site
-    '''
+    #   The main module that gets the html files, reformats them
+    #   and saves them for uploadinglater 
     with open(config.file_id_path, 'r') as f:
-        blog_id_file = json.load(f)
-    #list_of_ids = 
+        blog_id_file = json.load(f) 
     
     for id_file in blog_id_file["items"]:
         html_id = id_file["name"]
@@ -80,5 +78,10 @@ def html_file():
         with open(config.HTML_file,"w") as file:
             file.write(r.text)
         reformat_html(config.HTML_file)
+    print("\nGetting html files completed.")
         
-html_file()
+def main():
+    html_file()
+
+#if __name__ == '__main__':
+#    main()

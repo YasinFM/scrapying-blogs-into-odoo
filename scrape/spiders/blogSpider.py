@@ -3,7 +3,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))  # Add the parent directory to the sys.path
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import config
 
 def get_html_id(string):
@@ -15,8 +15,6 @@ class BlogspiderSpider(scrapy.Spider):
     name = "blogSpider"
     allowed_domains = config.allowed_domains
     start_urls = config.start_url
-
-    handle_httpstatus_list = [404]  # Handle 404 errors
     
     def start_requests(self):
         base_url = "https://7tooti.com/wb/blog/?_px_p="
@@ -56,15 +54,4 @@ class BlogspiderSpider(scrapy.Spider):
 
                 if html_address is not None:
                     html_id = get_html_id(html_address)
-                    file.write(str(html_id) + '\n')
-                
-                '''
-                yield{
-                    'id' : html_address
-                }
-                '''
-        '''
-        next_page = response.css(config.next_page_identifier).get()
-        if next_page is not None:
-            yield response.follow(next_page, callback=self.parse)
-        '''
+                    file.write(str(html_id) + '\n')                

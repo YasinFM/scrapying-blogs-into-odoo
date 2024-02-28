@@ -1,5 +1,4 @@
-
-#scrapy crawl blogSpider
+#   The config file for our project
 
 
 ####################################################################

@@ -1,7 +1,4 @@
 import subprocess
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))  # Add the parent directory to the sys.path
 import config
 
 
@@ -15,6 +12,7 @@ def run_scrapy_crawl():
         print(f"Error occurred while running scrapy crawl blogSpider: {e}")
 
 def get_ids_via_curl():
+    #   Runs a curl request on the website and returns all blogs' ids
     try:
         subprocess.run(["curl", "--location", "--globoff",
                         ( config.content_url +
@@ -22,8 +20,8 @@ def get_ids_via_curl():
                         "-o",
                         "./scrape/blog_ids.json"],
                     check=True)
-        print("GET request for getting the blog ids was successful.")
+        print("\nGET request for getting the blog ids was successful.")
+        return True
     except:
-        print("Error in getting the blog ids.")
-
-get_ids_via_curl()
+        print("\nError in getting the blog ids.")
+        return False

@@ -16,14 +16,14 @@ def delete_folder_contents(folder_path):
                 # If it's a directory, delete it recursively
                 delete_folder_contents(item_path)
                 os.rmdir(item_path)  # Then remove the empty directory
-        print(f"All contents inside '{folder_path}' have been deleted successfully.")
+        print(f"\nAll contents inside '{folder_path}' have been deleted successfully.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
 
 
 folder_path = "html-files"
-if __name__ == "__main__":
-    delete_folder_contents(folder_path)
+#if __name__ == "__main__":
+#    delete_folder_contents(folder_path)
     
 

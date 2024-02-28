@@ -1,6 +1,4 @@
 import os
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))  # Add the parent directory to the sys.path
 import config
 import xmlrpc.client
 import base64
@@ -63,9 +61,10 @@ def upload_html_files_as_blogs(directory):
             post_id = create_blog_post(filename, html_content, blog_id)
             if post_id:
                 print("Blog post created with ID:", post_id, "for file:", filename)
+    print("\nPosting blogs completed.")
 
 def main():
     upload_html_files_as_blogs(html_files_directory)
 
-if __name__ == '__main__':
-    main()
+#if __name__ == '__main__':
+#    main()
