@@ -25,16 +25,16 @@ def get_html_inside_div(html_path, div_class=None, div_id=None):
 
     # Return the HTML inside the div
     if div:
-        return str(div), div.text
+        return str(div), div.text, ''.join(map(str, div.contents))
     else:
-        return "", ""
+        return "", "", ""
 
 def get_html_title(html_path):
     title = ""
     title_name = ""
     div_class = 'w3-container'
     div_id = 'div-header'
-    title, title_name = get_html_inside_div(html_path,div_class,div_id)
+    title, title_name, title_div = get_html_inside_div(html_path,div_class,div_id)
     
     return title, title_name
 
@@ -43,9 +43,9 @@ def get_html_content(html_path):
     content_text = ""
     div_class = 'main-content'
     div_id = ''
-    content, content_text = get_html_inside_div(html_path,div_class,div_id)
+    content, content_text, content_div = get_html_inside_div(html_path,div_class,div_id)
     
-    return content
+    return content_div
 
 def reformat_html(html_path):
     '''

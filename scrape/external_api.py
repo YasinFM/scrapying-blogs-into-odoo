@@ -21,7 +21,7 @@ uid = common.authenticate(db, username, password, {})
 models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
 
 # Directory containing HTML files
-html_files_directory = '/home/yasin/Desktop/Work/scrape/html-files'
+html_files_directory = 'html-files'
 
 def create_blog():
     # Check if the blog already exists
