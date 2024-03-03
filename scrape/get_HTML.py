@@ -3,6 +3,12 @@ import requests
 from bs4 import BeautifulSoup
 import os
 import config
+import make_logs
+from enum import Enum
+
+class get_type(Enum):
+    ORIGINAL_FILES = "ORIGINAL_FILES"
+    REFOMATED_FILES = "REFORMATED_FILES"
 
 def get_html_inside_div(html_path, div_class=None, div_id=None):
     # Read HTML file
@@ -50,20 +56,38 @@ def get_html_content(html_path):
     
     return content_div
 
-def reformat_html(html_path):
-    #   The main module to strip, clean and overall reformats our html
+def save_old_html(name, html_path):
+    with open(html_path, 'r') as f:
+        old_content = f.read()
     
+    # Create the data folder if it doesn't already exist 
+    if not os.path.exists('html-files/old-html-files'): 
+        os.mkdir('html-files/old-html-files')
+    
+    with open('html-files/old-html-files/' + name + '-old.html', 'w') as f: 
+            f.write(old_content)
+            log = make_logs.log_type.GET_HTML
+            make_logs.make_log(log)
+
+def save_new_html(name, content):
     # Create the data folder if it doesn't already exist 
     if not os.path.exists('html-files'): 
         os.mkdir('html-files')
+        
+    with open('html-files/' + name + '.html', 'w') as f: 
+            f.write(content)
+            log = make_logs.log_type.GET_HTML
+            make_logs.make_log(log)
+
+def reformat_html(html_path):
+    #   The main module to strip, clean and overall reformats our html
     
     title, name = get_html_title(html_path)
     content = get_html_content(html_path)
 
     if title != '':
-        with open('html-files/' + name + '.html', 'w') as f: 
-            f.write(content) 
-        
+        save_old_html(name, html_path)
+        save_new_html(name, content)
 
 def html_file():
     #   The main module that gets the html files, reformats them
@@ -83,5 +107,5 @@ def html_file():
 def main():
     html_file()
 
-#if __name__ == '__main__':
-#    main()
+if __name__ == '__main__':
+    main()

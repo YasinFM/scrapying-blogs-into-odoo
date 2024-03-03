@@ -2,6 +2,7 @@ import os
 import config
 import xmlrpc.client
 import base64
+import make_logs
 
 # Connect to Odoo through JSON-RPC
 common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(config.odoo_url))
@@ -60,6 +61,8 @@ def upload_html_files_as_blogs(directory):
             html_content = read_html_file(html_file_path)
             post_id = create_blog_post(filename, html_content, blog_id)
             if post_id:
+                log = make_logs.log_type.POST_HTML
+                make_logs.make_log(log)
                 print("Blog post created with ID:", post_id, "for file:", filename)
     print("\nPosting blogs completed.")
 

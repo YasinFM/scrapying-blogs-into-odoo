@@ -22,6 +22,10 @@ content_url = "https://7tooti.com/api/v2/cms/term-taxonomies/205/contents"
 #   example: /home/user/blog_html_ids.txt
 file_id_path = "/home/yasin/Desktop/Work/scrape/scrape/blog_ids.json"
 
+#   File path to save logs
+#   example: /home/user/logs.json
+log_path = "/home/yasin/Desktop/Work/scrape/scrape/logs.json"
+
 #   Next page button's identifier
 #   example: "div.class#id::attr(href)"
 #   ** bare in mind that the button isn't necessary a <div> and can have any type **
@@ -35,7 +39,7 @@ json_saver_file = "/home/yasin/Desktop/Work/scrape/scrape/blogs.json"
 #   test HTML file
 #   we use this file to store, clean and reformat the html we get from our site
 #   example: /home/user/html_file.html
-HTML_file = "/home/yasin/Desktop/Work/scrape/scrape/html_file.html"
+HTML_file = "/home/yasin/Desktop/Work/scrape/html-files/old-html-files/html_file.html"
 
 ####################################################################
 #   Storing the information
